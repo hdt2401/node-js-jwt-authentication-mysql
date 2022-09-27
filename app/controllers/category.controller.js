@@ -6,6 +6,7 @@ const Op = db.Sequelize.Op;
 exports.create = (req, res, next) => {
   const newCategory = {
     name: req.body.name,
+    desc: req.body.desc,
   };
   Categories.create(newCategory)
     .then((data) => {
@@ -48,6 +49,20 @@ exports.findOne = (req, res) => {
     .catch((err) => {
       res.status(500).send({
         message: "Error retrieving category with name=" + name,
+      });
+    });
+};
+
+// Retrieve Tutorials with condition from the database
+exports.findCategoryById = (req, res) => {
+  const id = req.params.id;
+  Categories.findByPk(id)
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: "Error retrieving category with id=" + id,
       });
     });
 };

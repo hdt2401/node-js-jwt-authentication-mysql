@@ -9,6 +9,7 @@ module.exports = function (app) {
     next();
   });
   app.get("/api/category", controller.findAll);
+  app.get("/api/category/:id", controller.findCategoryById);
   app.get("/api/category/:name", controller.findOne);
   app.post("/api/category/create", controller.create);
   app.put("/api/category/update/:id", controller.update);
